@@ -1,0 +1,10 @@
+# Override language detection
+*.js linguist-language=JavaScript
+*.jsx linguist-language=JavaScript
+*.ts linguist-detectable=false
+*.tsx linguist-detectable=false
+package-lock.json linguist-generated=true
+node_modules/* linguist-vendored=true
+
+# Ensure project is detected as JavaScript
+* linguist-language=JavaScript
