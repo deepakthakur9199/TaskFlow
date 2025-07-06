@@ -6,13 +6,12 @@ import { Header } from './components/Layout/Header';
 import { Sidebar } from './components/Layout/Sidebar';
 import { TaskList } from './components/Tasks/TaskList';
 import { TaskForm } from './components/Tasks/TaskForm';
-import { Task, TaskFilter } from './types/task';
 
 function App() {
   const { user, loading: authLoading } = useAuth();
   const { tasks, loading: tasksLoading, createTask, updateTask, deleteTask, filterTasks } = useTasks();
   
-  const [filter, setFilter] = useState<TaskFilter>({
+  const [filter, setFilter] = useState({
     status: 'all',
     priority: 'all',
     search: '',
@@ -21,7 +20,7 @@ function App() {
   });
   
   const [isTaskFormOpen, setIsTaskFormOpen] = useState(false);
-  const [editingTask, setEditingTask] = useState<Task | null>(null);
+  const [editingTask, setEditingTask] = useState(null);
 
   const filteredTasks = useMemo(() => filterTasks(filter), [tasks, filter]);
   
@@ -37,12 +36,12 @@ function App() {
     setIsTaskFormOpen(true);
   };
 
-  const handleEditTask = (task: Task) => {
+  const handleEditTask = (task) => {
     setEditingTask(task);
     setIsTaskFormOpen(true);
   };
 
-  const handleSubmitTask = async (taskData: Omit<Task, 'id' | 'created_at' | 'updated_at' | 'user_id'>) => {
+  const handleSubmitTask = async (taskData) => {
     if (editingTask) {
       await updateTask(editingTask.id, taskData);
     } else {
@@ -50,13 +49,13 @@ function App() {
     }
   };
 
-  const handleDeleteTask = async (id: string) => {
+  const handleDeleteTask = async (id) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       await deleteTask(id);
     }
   };
 
-  const handleToggleComplete = async (id: string, completed: boolean) => {
+  const handleToggleComplete = async (id, completed) => {
     await updateTask(id, { status: completed ? 'completed' : 'pending' });
   };
 

@@ -39,46 +39,4 @@ const createMockClient = () => {
 
 export const supabase = hasValidConfig 
   ? createClient(supabaseUrl, supabaseAnonKey)
-  : createMockClient() as any;
-
-export type Database = {
-  public: {
-    Tables: {
-      tasks: {
-        Row: {
-          id: string;
-          title: string;
-          description: string | null;
-          priority: 'high' | 'medium' | 'low';
-          status: 'pending' | 'completed';
-          due_date: string | null;
-          created_at: string;
-          updated_at: string;
-          user_id: string;
-        };
-        Insert: {
-          id?: string;
-          title: string;
-          description?: string | null;
-          priority?: 'high' | 'medium' | 'low';
-          status?: 'pending' | 'completed';
-          due_date?: string | null;
-          created_at?: string;
-          updated_at?: string;
-          user_id: string;
-        };
-        Update: {
-          id?: string;
-          title?: string;
-          description?: string | null;
-          priority?: 'high' | 'medium' | 'low';
-          status?: 'pending' | 'completed';
-          due_date?: string | null;
-          created_at?: string;
-          updated_at?: string;
-          user_id?: string;
-        };
-      };
-    };
-  };
-};
+  : createMockClient();

@@ -2,20 +2,16 @@ import React, { useState } from 'react';
 import { LogIn, UserPlus, Mail, Lock, AlertCircle } from 'lucide-react';
 import { useAuth } from '../../hooks/useAuth';
 
-interface AuthFormProps {
-  onSuccess?: () => void;
-}
-
-export function AuthForm({ onSuccess }: AuthFormProps) {
+export function AuthForm({ onSuccess }) {
   const [isSignUp, setIsSignUp] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
   
   const { signIn, signUp } = useAuth();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);

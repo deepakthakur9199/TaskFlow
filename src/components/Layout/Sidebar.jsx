@@ -1,20 +1,7 @@
 import React from 'react';
 import { Plus, Filter, Search, Calendar, AlertCircle, CheckCircle, Clock } from 'lucide-react';
-import { TaskFilter } from '../../types/task';
 
-interface SidebarProps {
-  filter: TaskFilter;
-  onFilterChange: (filter: TaskFilter) => void;
-  onCreateTask: () => void;
-  taskStats: {
-    total: number;
-    pending: number;
-    completed: number;
-    highPriority: number;
-  };
-}
-
-export function Sidebar({ filter, onFilterChange, onCreateTask, taskStats }: SidebarProps) {
+export function Sidebar({ filter, onFilterChange, onCreateTask, taskStats }) {
   return (
     <aside className="w-80 bg-gray-50 border-r border-gray-200 p-6 overflow-y-auto">
       <button
@@ -83,7 +70,7 @@ export function Sidebar({ filter, onFilterChange, onCreateTask, taskStats }: Sid
               ].map(({ value, label, icon: Icon }) => (
                 <button
                   key={value}
-                  onClick={() => onFilterChange({ ...filter, status: value as any })}
+                  onClick={() => onFilterChange({ ...filter, status: value })}
                   className={`w-full text-left px-3 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors ${
                     filter.status === value
                       ? 'bg-blue-100 text-blue-700'
@@ -109,7 +96,7 @@ export function Sidebar({ filter, onFilterChange, onCreateTask, taskStats }: Sid
               ].map(({ value, label, color }) => (
                 <button
                   key={value}
-                  onClick={() => onFilterChange({ ...filter, priority: value as any })}
+                  onClick={() => onFilterChange({ ...filter, priority: value })}
                   className={`w-full text-left px-3 py-2 rounded-lg text-sm flex items-center gap-2 transition-colors ${
                     filter.priority === value
                       ? 'bg-blue-100 text-blue-700'
@@ -132,7 +119,7 @@ export function Sidebar({ filter, onFilterChange, onCreateTask, taskStats }: Sid
             <label className="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
             <select
               value={filter.sortBy || 'created_at'}
-              onChange={(e) => onFilterChange({ ...filter, sortBy: e.target.value as any })}
+              onChange={(e) => onFilterChange({ ...filter, sortBy: e.target.value })}
               className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
             >
               <option value="created_at">Date Created</option>

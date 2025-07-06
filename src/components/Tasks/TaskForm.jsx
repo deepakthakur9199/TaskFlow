@@ -1,21 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { X, Calendar, AlertCircle, FileText } from 'lucide-react';
-import { Task } from '../../types/task';
 
-interface TaskFormProps {
-  task?: Task | null;
-  isOpen: boolean;
-  onClose: () => void;
-  onSubmit: (taskData: Omit<Task, 'id' | 'created_at' | 'updated_at' | 'user_id'>) => Promise<void>;
-}
-
-export function TaskForm({ task, isOpen, onClose, onSubmit }: TaskFormProps) {
+export function TaskForm({ task, isOpen, onClose, onSubmit }) {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [priority, setPriority] = useState<'high' | 'medium' | 'low'>('medium');
+  const [priority, setPriority] = useState('medium');
   const [dueDate, setDueDate] = useState('');
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (task) {
@@ -32,7 +24,7 @@ export function TaskForm({ task, isOpen, onClose, onSubmit }: TaskFormProps) {
     setError(null);
   }, [task, isOpen]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     if (!title.trim()) {
@@ -124,7 +116,7 @@ export function TaskForm({ task, isOpen, onClose, onSubmit }: TaskFormProps) {
               <select
                 id="priority"
                 value={priority}
-                onChange={(e) => setPriority(e.target.value as 'high' | 'medium' | 'low')}
+                onChange={(e) => setPriority(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
               >
                 <option value="low">Low Priority</option>

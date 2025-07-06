@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-import { Task, TaskFilter } from '../types/task';
 import { useAuth } from './useAuth';
 
 export function useTasks() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
   const { user } = useAuth();
 
   const fetchTasks = async () => {
@@ -33,7 +32,7 @@ export function useTasks() {
     fetchTasks();
   }, [user]);
 
-  const createTask = async (taskData: Omit<Task, 'id' | 'created_at' | 'updated_at' | 'user_id'>) => {
+  const createTask = async (taskData) => {
     if (!user) return { error: new Error('User not authenticated') };
 
     try {
@@ -55,7 +54,7 @@ export function useTasks() {
     }
   };
 
-  const updateTask = async (id: string, updates: Partial<Task>) => {
+  const updateTask = async (id, updates) => {
     if (!user) return { error: new Error('User not authenticated') };
 
     try {
@@ -79,7 +78,7 @@ export function useTasks() {
     }
   };
 
-  const deleteTask = async (id: string) => {
+  const deleteTask = async (id) => {
     if (!user) return { error: new Error('User not authenticated') };
 
     try {
@@ -98,7 +97,7 @@ export function useTasks() {
     }
   };
 
-  const filterTasks = (filter: TaskFilter): Task[] => {
+  const filterTasks = (filter) => {
     let filtered = [...tasks];
 
     if (filter.status && filter.status !== 'all') {
@@ -119,8 +118,8 @@ export function useTasks() {
 
     if (filter.sortBy) {
       filtered.sort((a, b) => {
-        let aVal: any = a[filter.sortBy!];
-        let bVal: any = b[filter.sortBy!];
+        let aVal = a[filter.sortBy];
+        let bVal = b[filter.sortBy];
 
         if (filter.sortBy === 'priority') {
           const priorityOrder = { high: 3, medium: 2, low: 1 };

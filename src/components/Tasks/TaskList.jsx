@@ -1,17 +1,8 @@
 import React from 'react';
 import { CheckSquare } from 'lucide-react';
-import { Task } from '../../types/task';
 import { TaskCard } from './TaskCard';
 
-interface TaskListProps {
-  tasks: Task[];
-  onEditTask: (task: Task) => void;
-  onDeleteTask: (id: string) => void;
-  onToggleComplete: (id: string, completed: boolean) => void;
-  loading?: boolean;
-}
-
-export function TaskList({ tasks, onEditTask, onDeleteTask, onToggleComplete, loading }: TaskListProps) {
+export function TaskList({ tasks, onEditTask, onDeleteTask, onToggleComplete, loading }) {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
