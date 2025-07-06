@@ -1,6 +1,6 @@
 import React from 'react';
 import { Calendar, CheckCircle, Circle, Edit2, Trash2, AlertCircle } from 'lucide-react';
-import { format, isAfter, isBefore, startOfDay } from 'date-fns';
+import { format, isBefore, startOfDay } from 'date-fns';
 
 export function TaskCard({ task, onEdit, onDelete, onToggleComplete }) {
   const priorityColors = {

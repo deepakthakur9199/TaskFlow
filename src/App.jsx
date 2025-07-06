@@ -22,7 +22,7 @@ function App() {
   const [isTaskFormOpen, setIsTaskFormOpen] = useState(false);
   const [editingTask, setEditingTask] = useState(null);
 
-  const filteredTasks = useMemo(() => filterTasks(filter), [tasks, filter]);
+  const filteredTasks = useMemo(() => filterTasks(filter), [filter, filterTasks]);
   
   const taskStats = useMemo(() => ({
     total: tasks.length,

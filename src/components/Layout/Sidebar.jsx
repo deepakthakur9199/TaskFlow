@@ -1,5 +1,5 @@
 import React from 'react';
-import { Plus, Filter, Search, Calendar, AlertCircle, CheckCircle, Clock } from 'lucide-react';
+import { Plus, Filter, Search, Calendar, CheckCircle, Clock } from 'lucide-react';
 
 export function Sidebar({ filter, onFilterChange, onCreateTask, taskStats }) {
   return (

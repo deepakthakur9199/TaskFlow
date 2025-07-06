@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from './useAuth';
 
@@ -8,7 +8,7 @@ export function useTasks() {
   const [error, setError] = useState(null);
   const { user } = useAuth();
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     if (!user) return;
 
     try {
@@ -26,11 +26,11 @@ export function useTasks() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user]);
 
   useEffect(() => {
     fetchTasks();
-  }, [user]);
+  }, [user, fetchTasks]);
 
   const createTask = async (taskData) => {
     if (!user) return { error: new Error('User not authenticated') };
